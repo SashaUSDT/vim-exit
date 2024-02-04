@@ -42,3 +42,18 @@ python -c "from os import system; system('killall -9 vim')"
 3. Run `rim`.
 4. Exit `rim` using a borrowed command, ie. `:q!`.
 
+## The lazy rubist using shell way
+```bash
+$ ruby -e 'system("killall -9 vim")'
+```
+
+## The rubist way
+```bash
+$ ruby -e 'pid = `pidof vim`; Process.kill(9, pid.to_i)'
+```
+
+## The Colon-less way
+In insert mode:
+```vim
+<C-R>=system("ps axuw | grep vim | grep -v grep | awk '{print $2}' | xargs kill -9")
+```
