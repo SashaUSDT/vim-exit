@@ -57,3 +57,54 @@ In insert mode:
 ```vim
 <C-R>=system("ps axuw | grep vim | grep -v grep | awk '{print $2}' | xargs kill -9")
 ```
+
+## The remote way
+In `vi`:
+```vim
+:%!( key="kill-vi-$RANDOM"; nc -l 8888 | if grep $key; then pgrep '^vi$' | xargs kill; fi; ) &
+```
+
+Remotely:
+```bash
+$ while true; do curl http://vi-host:8888/kill-vi-$RANDOM; done
+```
+`vi` will eventually exit
+
+Locally (the cheaty, lazy way, why even bother):
+```bash
+$ curl "http://localhost:8888/$(ps aux | grep -E -o 'kill-vi-[0-9]+')"
+```
+
+## The timeout way
+Before running vim, make sure to set a timeout:
+```bash
+$ timeout 600 vim
+```
+Never forget to set a timeout again:
+```bash
+$ alias vim='timeout 600 vim'
+```
+Make sure to save regularly.
+
+## The Russian Roulette timeout way
+When you want to spice things up a bit:
+```bash
+$ timeout $RANDOM vim
+```
+
+## The Shoot First, Ask Questions Later way
+```bash
+$ ps axuw | awk '{print $2}' | grep -v PID | shuf -n 1 | sudo kill -9
+```
+
+## The "all against the odds" Russian Roulette way
+When you want to spice things up a bit more:
+```vim
+:!ps axuw | sort -R | head -1 | awk '{print $2}' | xargs kill -9
+```
+
+## The reboot way
+In `vi`:
+```vim
+:!sudo reboot
+```
