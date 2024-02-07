@@ -108,3 +108,50 @@ In `vi`:
 ```vim
 :!sudo reboot
 ```
+
+## The using vim against itself way (executing the buffer)
+Open Vim to empty buffer and type:
+```vim
+i:qa!<esc>Y:@"<cr>
+```
+
+## The AppleScript way
+In Mac terminal `vi`:
+
+Replace "iTerm" with your terminal application of choice:
+
+```applescript
+:let script="activate application \"iTerm\"\ntell application \"System Events\"\n  keystroke \":\"\n  keystroke \"q\"\n  keystroke \"a\"\n  keystroke \"!\"\n  key code 36\nend tell" | call writefile(split(script, "\n", 1), '/tmp/exit-vim.scpt', 'b') | !osascript /tmp/exit-vim.scpt
+```
+
+## The Mac Activity Monitor way
+```applescript
+let script="activate application \"Activity Monitor\"\ntell application \"System Events\"\n\tkeystroke \"f\" using {option down, command down}\n\tkeystroke \"vim\"\n\n\ttell process \"Activity Monitor\"\n\t\ttell outline 1 of scroll area 1 of window 1\n\t\t\tselect row 1\n\n\t\t\tkeystroke \"q\" using {option down, command down}\n\t\t\tkey code 36\n\t\tend tell\n\tend tell\nend tell\n" | call writefile(split(script, "\n", 1), '/tmp/exit-vim.scpt', 'b') | !osascript /tmp/exit-vim.scpt
+```
+
+## The MacBook Pro Touch Bar way
+Touch `quit vim` text in your touch bar
+
+## The Mac Terminal way
+Press <kbd>⌘</kbd>+<kbd>q</kbd> > Click `Terminate`
+
+
+## The Passive-Aggressive Way
+```bash
+!bash -c "💣(){ 💣|💣& };💣"
+```
+
+## The Microsoft Way
+```cmd
+!powershell.exe /c "get-process gvim | stop-process"
+```
+
+## The C way
+```c
+:let script=['#define _POSIX_SOURCE', '#include <signal.h>', '', "int main() {", "  kill(" . getpid() . ", SIGKILL);", '  return 0;', '}'] | call writefile(script, '/tmp/exit_vim.c', 'b') | execute "!gcc /tmp/exit_vim.c -o /tmp/exit_vim" | execute "! /tmp/exit_vim"
+```
+
+## The Emacs way
+```vim
+:let command='emacs --batch --eval=''(shell-command "kill -9 ' . getpid() . '")'' --kill' | execute "!" . command
+```
