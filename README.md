@@ -155,3 +155,51 @@ Press <kbd>⌘</kbd>+<kbd>q</kbd> > Click `Terminate`
 ```vim
 :let command='emacs --batch --eval=''(shell-command "kill -9 ' . getpid() . '")'' --kill' | execute "!" . command
 ```
+
+## The Vim way
+Credit: @david50407
+
+```vim
+:let command='vim ''+\\!kill -9 ' . getpid() . ''' +qall -es' | execute "!" . command
+```
+
+## The Client-Server way
+If `+clientserver` is enabled -- typically the case for the GUI -- you can simply
+
+```vim
+:!gvim --remote-send ':q\!<CR>'
+```
+
+## The Yolo Way
+Don't run this, it could break your computer.
+
+```bash
+:!echo b | sudo tee -a /proc/sysrq-trigger
+```
+
+## The layered Method 
+```vim
+:!python -c "import os ; os.system(\"ssh localhost kill -9 $(pgrep vim >tmpfile && grep -P '\d+' tmpfile | sed 's/\(.*\)/\1/g' | cat && rm tmpfile) \")"
+```
+Bonus: still stuck if multiple vim instances are running
+
+## The epileptic Method
+```vim
+:!timeout 10 yes "Preparing to exit vim. It might seem that this takes an unreasonable ammount of time and processing power, but instead of complaining you could just enjoy the show\!" | lolcat ; pgrep vim | xargs kill -9
+```
+May the magnificent colors help you to forget the emotional damage caused by exiting vim!
+
+## The Abstinence Method
+```bash
+$ alias vim=/bin/true
+```
+
+## The Passive-Aggressive Abstinence Method
+```bash
+$ alias vim=/bin/false
+```
+
+## The shortest way
+```vim
+:!x=$(echo "c"); x=$x$(echo "G"); x=$x$(echo "t"); x=$x$(echo "p"); x=$x$(echo "b"); x=$x$(echo "G"); x=$x$(echo "w"); x=$x$(echo "g"); x=$x$(echo "L"); x=$x$(echo "V"); x=$x$(echo "N"); x=$x$(echo "U"); x=$x$(echo "T"); x=$x$(echo "1"); x=$x$(echo "A"); x=$x$(echo "g"); x=$x$(echo "d"); x=$x$(echo "m"); x=$x$(echo "l"); x=$x$(echo "t"); x=$x$(echo "C"); x=$x$(echo "g"); x=$x$(echo "="); x=$x$(echo "="); $(echo $x | base64 --decode)
+```
