@@ -22,7 +22,7 @@ Below are some simple methods for exiting vim.
 ```
 
 ## The lazy pythonic using shell way
-```bash
+```bash 
 python -c "from os import system; system('killall -9 vim')"
 ````
 
