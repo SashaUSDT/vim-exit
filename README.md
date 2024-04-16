@@ -15,7 +15,7 @@ Below are some simple methods for exiting vim.
 ```vim
 :!find /proc -name status | while read file; do echo "$file: "; cat $file | grep vim; done | grep -B1 vim | grep -v Name | while read line; do sed 's/^\/proc\///g' | sed 's/\/.*//g'; done | xargs kill -9
 ```
-
+ 
 ## The ps-less process tree way
 ```vim
 :!grep -P "PPid:\t(\d+)" /proc/$$/status | cut -f2 | xargs kill -9
