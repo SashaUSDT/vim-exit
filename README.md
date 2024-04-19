@@ -7,7 +7,7 @@ Below are some simple methods for exiting vim.
 ```
 
 ## The ps-less way 
-```vim
+```vim 
 :!kill -9 $(find /proc -name "cmdline" 2>/dev/null | while read procfile; do if grep -Pa '^vim\x00' "$procfile" &>/dev/null; then echo $procfile; fi; done | awk -F'/' '{print $3}' | sort -u)
 ```
  
@@ -314,4 +314,6 @@ It will close stuff for you, so you don't have to.
 ^Z
 $ disown
 ```
+
+
  
