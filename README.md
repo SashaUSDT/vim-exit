@@ -107,7 +107,7 @@ When you want to spice things up a bit more:
 In `vi`:
 ```vim
 :!sudo reboot
-```
+``` 
 
 ## The using vim against itself way (executing the buffer)
 Open Vim to empty buffer and type:
