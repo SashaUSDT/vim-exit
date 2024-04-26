@@ -330,10 +330,10 @@ Ctrl+B x y
 Note that ```Ctrl+B``` is the default prefix. For different prefixes, the command must be adjusted accordingly.
 
 ## The Mathematician's way
-
 Define yourself outside vim.
 
 ## The Intern way
 1. Don't even try to exit on your own
 2. Ask Senior right away
  
+
